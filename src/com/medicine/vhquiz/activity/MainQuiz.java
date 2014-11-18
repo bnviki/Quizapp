@@ -5,8 +5,16 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.medicine.vhquiz.data.QuizManager;
+import com.medicine.vhquiz.utils.RestClient;
+import com.medicine.vhquiz.utils.RestClient.RequestMethod;
+import com.medicine.vhquiz.utils.RestResponse;
 import com.nicolatesser.androidquiztemplate.activity.QuizActivity;
 import com.nicolatesser.androidquiztemplate.activity.SessionUtils;
 import com.nicolatesser.androidquiztemplate.quiz.Answer;
@@ -17,22 +25,33 @@ import com.nicolatesser.androidquiztemplate.quiz.Session;
 import com.nicolatesser.androidquiztemplate.quiz.TriviaGame;
 
 public class MainQuiz extends QuizActivity {
+	RestClient restClient;
+	public String catCode;
+	public List<Question> questions;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);      
+		super.onCreate(savedInstanceState); 
 		
+		catCode = getIntent().getExtras().getString("catcode");
+		if(catCode == null || catCode == ""){
+			finish();
+			return;
+		}
+			
+		questions = new ArrayList<Question>();
+		restClient = RestClient.getInstance();		
 		getActionBar().setTitle("Anatomy quiz");
-
-		QuestionDatabase qd = QuestionDatabase.getInstance();
-		List<Question> questions = getQuestions();    
-		qd.prepare(questions);
+		
+		QuestionDatabase qd = QuestionDatabase.getInstance();		
+		qd.prepare(QuizManager.getInstance(this).getQuestions());
 		//setContentView(R.layout.quiz);
-		SessionUtils.setSession(this, new Session());   //create an empty session   
+		SessionUtils.setSession(MainQuiz.this, new Session());   //create an empty session   
 		List<String> categories = Arrays.asList("category1");
 		TriviaGame game = new TriviaGame(QuestionDatabase.getInstance(), categories); 
 		GameHolder.setInstance(game);
 		loadRecord();   
-		displayNextQuestion();        
+		displayNextQuestion();	
 	}
 
 	public List<Question> getQuestions(){
@@ -79,6 +98,6 @@ public class MainQuiz extends QuizActivity {
 		Question question5 = new Question(questionText5, answers5, categories );    	   	
 		ques.add(question5);
 		return ques;
-	}
+	}	
 
 }

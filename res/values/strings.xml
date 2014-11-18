@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Meddworld Quiz</string>
+    <string name="app_id">284993378361028</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <color name="button_blue">#3469B3</color>
