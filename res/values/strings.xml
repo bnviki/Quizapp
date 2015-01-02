@@ -6,5 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <color name="button_blue">#3469B3</color>
+    <color name="grey_font">#424242</color>
+    <color name="soft_blue">#3D5E78</color>
+    <string name="banner_ad_unit_id">ca-app-pub-4848697070927959/1356143826</string>
 
 </resources>

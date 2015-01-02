@@ -1,5 +1,8 @@
 package com.medicine.vhquiz.activity;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import org.brickred.socialauth.Profile;
 import org.brickred.socialauth.android.DialogListener;
 import org.brickred.socialauth.android.SocialAuthAdapter;
@@ -11,9 +14,15 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,6 +63,7 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		getActionBar().hide();
 		
+		printHashKey(this);
 		CookieSyncManager.createInstance(this);
 		CookieManager cookieManager = CookieManager.getInstance();
 		cookieManager.removeAllCookie();
@@ -89,13 +99,43 @@ public class MainActivity extends ActionBarActivity {
 				MainActivity.pos = position;
 
 				if (listAdapter.providers[position].equals(Provider.GOOGLEPLUS))
-					adapter.addCallBack(Provider.GOOGLEPLUS, "http://www.eventfriendly.com/success");
+					adapter.addCallBack(Provider.GOOGLEPLUS, "https://www.meddworld.com/success");
 				
 				// This method will enable the selected provider
 				adapter.authorize(MainActivity.this, listAdapter.providers[position]);
 			}
 		});	
 		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		showSplash();
+	}
+	
+	public void showSplash(){
+		SharedPreferences prefs = getSharedPreferences("medsplash", Context.MODE_PRIVATE);
+		if(!prefs.getBoolean("splashshown", false)){
+			Intent splashIntent = new Intent(MainActivity.this, SplashScreen.class);
+			startActivity(splashIntent);
+			
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putBoolean("splashshown", true);
+			editor.commit();
+		}
+	}
+	
+	public static void printHashKey(Context context) {
+		try {
+			String TAG = "com.mpeers";
+			PackageInfo info = context.getPackageManager().getPackageInfo(TAG, PackageManager.GET_SIGNATURES);
+			for (Signature signature : info.signatures) {
+				MessageDigest md = MessageDigest.getInstance("SHA");
+				md.update(signature.toByteArray());
+				String keyHash = Base64.encodeToString(md.digest(), Base64.DEFAULT);
+				Log.d(TAG, "keyHash: " + keyHash);
+			}
+		} catch (NameNotFoundException e) {
+
+		} catch (NoSuchAlgorithmException e) {
+
+		}
 	}
 	
 	public static void hideSoftKeyboard (Activity activity, View view) 

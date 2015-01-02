@@ -53,7 +53,8 @@ public class QuizManager {
 						for(int i=0; i < jArray.length(); i++){						
 							JSONObject obj = jArray.getJSONObject(i);
 							CategoryItem cat = new CategoryItem(CategoryItem.MAIN_CATEGORY, obj);
-							mainCats.add(cat);
+							if(!cat.name.equals(""))
+								mainCats.add(cat);
 						}	
 					} catch(Exception e){
 						

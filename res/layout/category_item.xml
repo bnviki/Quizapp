@@ -3,11 +3,13 @@
     android:id="@+id/title"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center" 
-    android:text="hello"
+    android:background="@drawable/list"
+    android:gravity="center"
     android:padding="15dp"
+    android:text="This text is looking good"
     android:textAppearance="@android:style/TextAppearance.Medium"
-    android:background="@android:color/white">
-    
+    android:textColor="@android:color/white"
+    android:textStyle="normal"
+    android:typeface="monospace" >
 
 </TextView>

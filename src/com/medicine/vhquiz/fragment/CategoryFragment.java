@@ -5,7 +5,10 @@ import java.util.List;
 
 import android.app.ListFragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,11 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.medicine.vhquiz.R;
 import com.medicine.vhquiz.activity.CategorySelection;
 import com.medicine.vhquiz.activity.Instruction;
-import com.medicine.vhquiz.activity.MainQuiz;
 import com.medicine.vhquiz.adapter.MainCategoryAdapter;
 import com.medicine.vhquiz.data.QuizManager;
 import com.medicine.vhquiz.data.entity.CategoryItem;
@@ -55,7 +57,17 @@ public class CategoryFragment extends ListFragment {
 		    if(category == CategoryCode.SUB)
 		    	mainCategoryCode = bundle.getString("catcode", "");
 		}
-		new FetchCats().execute();
+		if(!checkNetwork()){			
+			Toast.makeText(getActivity(), "please connect to network", Toast.LENGTH_LONG).show(); 			
+		} else {
+			new FetchCats().execute();
+		}		
+	}
+	
+	public boolean checkNetwork(){
+		ConnectivityManager cm = (ConnectivityManager)getActivity().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);	        	 
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		return (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
 	}
 	
 	@Override

@@ -5,16 +5,26 @@
     android:orientation="vertical"
     android:background="@drawable/pattern" 
     android:padding="5dp">
+    
+    <fragment
+        android:id="@+id/adFragment"
+        class="com.medicine.vhquiz.fragment.AdFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
 
     <LinearLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/adFragment" 
+        android:layout_above="@+id/backButton"       
         android:orientation="vertical" >
+
     </LinearLayout>
 
     <Button
-        android:id="@+id/backButton"
+        android:id="@id/backButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

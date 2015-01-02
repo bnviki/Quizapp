@@ -41,7 +41,7 @@ public class MainQuiz extends QuizActivity {
 			
 		questions = new ArrayList<Question>();
 		restClient = RestClient.getInstance();		
-		getActionBar().setTitle("Anatomy quiz");
+		getActionBar().setTitle("Quiz");
 		
 		QuestionDatabase qd = QuestionDatabase.getInstance();		
 		qd.prepare(QuizManager.getInstance(this).getQuestions());

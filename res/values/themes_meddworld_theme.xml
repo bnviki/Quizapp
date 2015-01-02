@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="meddworld_theme" parent="@style/_meddworld_theme"/>
+
+  <style name="_meddworld_theme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    <item name="android:editTextStyle">@style/EditTextmeddworld_theme</item>
+
+    <item name="android:textColorHighlight">#993469b3</item>
+
+    <item name="android:buttonStyle">@style/Buttonmeddworld_theme</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonmeddworld_theme</item>
+
+  </style>
+
+</resources>
