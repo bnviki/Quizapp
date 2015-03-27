@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pattern" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/med_banner2"
+        android:layout_above="@+id/controls" 
+        />
+
+    <LinearLayout
+        android:id="@id/controls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"       
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/startQuizBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose category" 
+            android:background="@drawable/list"/>
+
+        <Button
+            android:id="@+id/settingsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Settings" 
+            android:background="@drawable/list"/>
+
+        <Button
+            android:id="@+id/statsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Statistics"
+            android:background="@drawable/list" />
+        
+        <Button
+            android:id="@+id/feedbackBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Feedback"
+            android:background="@drawable/list" />
+
+        <Button
+            android:id="@+id/quitBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quit" 
+            android:background="@drawable/list"/>
+    </LinearLayout>
+
+</RelativeLayout>

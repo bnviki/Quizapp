@@ -38,6 +38,7 @@ public class MainQuiz extends QuizActivity {
 			finish();
 			return;
 		}
+		super.quizCategory = catCode;
 			
 		questions = new ArrayList<Question>();
 		restClient = RestClient.getInstance();		

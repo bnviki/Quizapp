@@ -1,13 +1,12 @@
 package com.medicine.vhquiz.activity;
 
-import com.medicine.vhquiz.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.CompoundButton;
-import android.widget.Switch;
+import android.widget.RadioGroup;
+
+import com.medicine.vhquiz.R;
 
 public class Settings extends Activity{
 	@Override
@@ -16,15 +15,22 @@ public class Settings extends Activity{
 		setContentView(R.layout.settings);
 		SharedPreferences prefs = getSharedPreferences("medsplash", Context.MODE_PRIVATE);
 		
-		Switch ansAtEndButton = (Switch) findViewById(R.id.switch1);
-		ansAtEndButton.setChecked(prefs.getBoolean("showAnsAtEnd", false));
-		ansAtEndButton.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+		RadioGroup quizMode = (RadioGroup) findViewById(R.id.radioGroup1);
+		if(prefs.getBoolean("showAnsAtEnd", false))
+			quizMode.check(R.id.radio1);
+		else
+			quizMode.check(R.id.radio0);
+		
+		quizMode.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			
 			@Override
-			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {			
+			public void onCheckedChanged(RadioGroup group, int checkedId) {			
 				SharedPreferences prefs = getSharedPreferences("medsplash", Context.MODE_PRIVATE);
 				SharedPreferences.Editor editor = prefs.edit();
-				editor.putBoolean("showAnsAtEnd", arg1);
+				if(checkedId == R.id.radio0)
+					editor.putBoolean("showAnsAtEnd", false);
+				else 
+					editor.putBoolean("showAnsAtEnd", true);
 				editor.commit();
 			}
 		});

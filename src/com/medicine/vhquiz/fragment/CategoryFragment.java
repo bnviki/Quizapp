@@ -139,7 +139,7 @@ public class CategoryFragment extends ListFragment {
  		@Override
  		protected void onPostExecute(Boolean state) {
  			pDialog.dismiss();			
- 			categories.clear();
+ 			categories.clear(); 			
  			if(category == CategoryCode.MAIN){
  				categories.addAll(quizManager.mainCats);
  			} else if(category == CategoryCode.SUB){

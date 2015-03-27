@@ -19,7 +19,7 @@ public class MainCategoryAdapter extends ArrayAdapter<CategoryItem> {
 	private Context context;
 
 	public MainCategoryAdapter(Context context, List<CategoryItem> objects) {
-		super(context, R.layout.main_category_item, objects);
+		super(context, R.layout.main_category_item, R.id.title, objects);
 		this.values = objects;
 		this.context = context;
 	}

@@ -79,12 +79,19 @@ public class MainActivity extends ActionBarActivity {
 				if(!username.equals("") && !password.equals(""))
 					new LoginUser().execute(username, password);
 			}
-		});	
+		});
+		
+		Button signupButton = (Button) findViewById(R.id.signup);		
+		signupButton.setOnClickListener(new View.OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				Intent signupIntent = new Intent(MainActivity.this, Signup.class);
+				startActivity(signupIntent);				
+			}
+		});
 		
 		if(UserManager.getInstance(this).checkForUser() != null){
-			Intent categoryIntent = new Intent(MainActivity.this, CategorySelection.class);
-			startActivity(categoryIntent);
-			finish();
+			startHomeScreen();
 		}
 
 		adapter = new SocialAuthAdapter(new ResponseListener());
@@ -211,9 +218,7 @@ public class MainActivity extends ActionBarActivity {
 			
 			User newUser = new User(t.getValidatedId(), t.getFullName(), t.getEmail(), picture, t.getProviderId());
 			if(UserManager.getInstance(MainActivity.this).loginUser(newUser)){
-				Intent categoryIntent = new Intent(MainActivity.this, CategorySelection.class);
-				startActivity(categoryIntent);
-				finish();
+				startHomeScreen();
 			}
 		}
 
@@ -221,6 +226,12 @@ public class MainActivity extends ActionBarActivity {
 		public void onError(SocialAuthError e) {
 
 		}
+	}
+	
+	public void startHomeScreen(){
+		Intent homeScreenIntent = new Intent(MainActivity.this, HomeScreen.class);
+		startActivity(homeScreenIntent);
+		finish();
 	}
 	
 	private class LoginUser extends AsyncTask<String, String, Boolean> {
@@ -245,9 +256,7 @@ public class MainActivity extends ActionBarActivity {
  		protected void onPostExecute(Boolean state) {
  			pDialog.dismiss();		
  			if(state){
- 				Intent categoryIntent = new Intent(MainActivity.this, CategorySelection.class);
-				startActivity(categoryIntent);
-				finish();
+ 				startHomeScreen();
  			} else {
  				Toast.makeText(MainActivity.this, "Username and password incorrect", Toast.LENGTH_SHORT).show();
  			}

@@ -1,17 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"    
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pattern"
     android:orientation="vertical"
-    android:padding="10dp" 
-    android:background="@drawable/pattern">
+    android:padding="20dp" >
 
-    <Switch
-        android:id="@+id/switch1"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="view answers at the end of quiz" 
-        android:textColor="@android:color/white"/>
+        android:text="Choose quiz mode"
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="In practice mode, you can see the answers immediately after answering. In Exam mode, answers are show at the end"         
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="20dp"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radio0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Practice Mode" 
+            android:textColor="@android:color/white"/>        
+
+        <RadioButton
+            android:id="@+id/radio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exam mode" 
+            android:textColor="@android:color/white"/>
+    </RadioGroup>
 
 </LinearLayout>

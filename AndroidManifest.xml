@@ -33,6 +33,14 @@
         </activity>
         <activity android:name=".activity.CategorySelection" >
         </activity>
+        <activity android:name=".activity.HomeScreen" >
+        </activity>
+        <activity android:name=".activity.Signup" >
+        </activity>
+        <activity android:name=".activity.Feedback" >
+        </activity>
+        <activity android:name=".activity.Statistics" >
+        </activity>
         <activity android:name=".activity.Instruction" >
         </activity>
         <activity android:name=".activity.ProfileView" >

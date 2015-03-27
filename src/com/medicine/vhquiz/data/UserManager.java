@@ -1,5 +1,8 @@
 package com.medicine.vhquiz.data;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.brickred.socialauth.android.SocialAuthAdapter;
 
 import android.content.Context;
@@ -46,6 +49,39 @@ public class UserManager {
 		RestResponse res = restClient.execute(encodedUri, RequestMethod.GET, null, null);    	
 
 		if(res.responseCode == 200){	
+			User newUser = new User(res.response);
+			newUser.picture = "dummy";
+			return loginUser(newUser);
+		} 
+		return false;
+	}
+	
+	public boolean signupUser(String username, String password, String email){
+		String url = "";
+		url = "/quiz/restserver/index.php/medquiz/signup/username/" + username + "/password/" + password + "/email/" + email;		
+		RestResponse res = restClient.execute(url, RequestMethod.GET, null, null);    	
+
+		if(res.responseCode == 200){	
+			User newUser = new User("", username, email, "dummy", "");
+			return loginUser(newUser);
+		} 
+		return false;
+	}
+	
+	public boolean sendFeedback(String msg){
+		User current = getCurrentUser(); 
+		if(current == null)
+			return false;		
+		String url = "";
+		try {
+			url = "/quiz/restserver/index.php/medquiz/feedback/username/" + URLEncoder.encode(current.displayName, "utf-8") + "/email/" + URLEncoder.encode(current.email, "utf-8") + "/message/" + URLEncoder.encode(msg, "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+		RestResponse res = restClient.execute(url, RequestMethod.GET, null, null);    	
+
+		if(res.responseCode == 200){
 			return true;
 		} 
 		return false;
